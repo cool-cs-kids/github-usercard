@@ -1,8 +1,20 @@
+import axios from 'axios';
+
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+
+let gitHubData = {};
+axios
+  .get('https://api.github.com/users/tryingtokeepup')
+  .then((response) => {
+    gitHubData = response.data;
+    console.log(gitHubData);
+  })
+  .catch((error) => console.log(error))
+  .finally(console.log('data is coming through'));
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -49,6 +61,47 @@ const followersArray = [];
       </div>
     </div>
 */
+
+function gitHubCardMaker(gitHubData) {
+  // first, create all elements using createElement
+  const cardContainer = document.createElement('div');
+  const img = document.createElement('img');
+  const cardInfoContainer = document.createElement('div');
+  const nameH3 = document.createElement('h3');
+  const usernameP = document.createElement('p');
+  const locationP = document.createElement('p');
+  const profileP = document.createElement('p');
+  const profileA = document.createElement('a');
+  const followersP = document.createElement('p');
+  const followingP = document.createElement('p');
+  const bioP = document.createElement('p');
+
+  // second, attach classes to the elements with classList
+
+  cardContainer.classList.add('card');
+  // no img class  to put on img div
+  cardInfoContainer.classList.add('card-info');
+  nameH3.classList.add('name');
+  usernameP.classList.add('username');
+
+  // third, append the child nodes to cardContainer div with .appendChild
+  cardContainer.appendChild(img);
+  cardContainer.appendChild(cardInfoContainer);
+  // console.log(cardContainer);
+  cardInfoContainer.appendChild(nameH3);
+  cardInfoContainer.appendChild(usernameP);
+  cardInfoContainer.appendChild(locationP);
+  cardInfoContainer.appendChild(profileP);
+  profileP.appendChild(profileA);
+  cardInfoContainer.appendChild(followersP);
+  cardInfoContainer.appendChild(followingP);
+  cardInfoContainer.appendChild(bioP);
+
+  console.log(cardContainer);
+  return cardContainer;
+}
+
+gitHubCardMaker({});
 
 /*
   List of LS Instructors Github username's:
